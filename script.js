@@ -33,7 +33,16 @@ function revealDiscount(cardId) {
 
 // Function to generate a random discount
 function getRandomDiscount() {
-    const discounts = ['10% off', '20% off', '50% off'];
+    const randomNum = Math.random();
+    let discounts = [];
+
+    if (randomNum < 0.60) { // 60% chance
+        discounts.push("10% off");
+    } else if (randomNum < 0.95) { // 35% chance
+        discounts.push("20% off");
+    } else { // 5% chance
+        discounts.push("50% off");
+    }
     const randomIndex = Math.floor(Math.random() * discounts.length);
     return discounts[randomIndex];
 }
@@ -44,7 +53,6 @@ function getRandomCode() {
     return `EYEC${String(randomNum).padStart(5, '0')}`;  // Pads with zeros to ensure 5 digits
 }
 
-// Remove the DOMContentLoaded event listener, as we won't need it in this version of the code.
 function getCookie(name) {
     let value = "; " + document.cookie;
     let parts = value.split("; " + name + "=");
@@ -61,7 +69,6 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-
 function gameEnd() {
     // Disable the input and button
     document.getElementById('phoneNumber').setAttribute('disabled', true);
@@ -69,4 +76,3 @@ function gameEnd() {
 
     // ... any other logic you want to execute when the game ends
 }
-
