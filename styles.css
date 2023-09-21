@@ -78,3 +78,15 @@ body {
 .input-container button {
     margin: 5px; /* Add some space around the input and button */
 }
+
+body {
+    background-image: url('background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.prize-pool-style {
+    text-align: center;
+    font-size: larger; /* Adjust this value as needed */
+}
