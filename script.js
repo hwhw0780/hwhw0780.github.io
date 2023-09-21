@@ -1,9 +1,11 @@
 function startGame() {
     const phoneNumber = document.getElementById('phoneNumber').value;
+    document.getElementById("prizePoolDetails").style.display = "none";
 
     // Check if the user with this phone number has played before
     if (getCookie(phoneNumber)) {
         alert('You have already played!');
+        
     } else {
         // Set a cookie for this user
         setCookie(phoneNumber, 'played', 30); // The number '30' signifies the cookie will expire in 30 days
@@ -23,7 +25,16 @@ function revealDiscount(cardId) {
     // Insert the random discount and code into the card
     const discount = getRandomDiscount();
     const code = getRandomCode();
-    card.querySelector('.card-back-content').innerHTML = `<div>Congratulations! You won</div><div>${discount}</div><div>Discount Code: ${code}</div><div>Phone number: ${phoneNumber.value}</div><br><div>Screenshot this to redeem the voucher! :)</div>`;
+    document.getElementById("redeemText").style.display = "block";
+    document.getElementById("redeemSteps").style.display = "block";
+    
+    // Calculate expiry date (14 days from now)
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 14);
+    const expiryDateText = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+
+    card.querySelector('.card-back-content').innerHTML = `<div>You won</div><div>${discount}</div><div>Discount Code: ${code}</div><div>Phone number: ${phoneNumber.value}</div><div style="color: red;">Expiry Date: ${expiryDateText}</div><br><div>Screenshot this to redeem the voucher! :)</div>`;
+    
     
     // Disable further interactions for all cards
     document.getElementById("card1").onclick = null;
@@ -37,11 +48,11 @@ function getRandomDiscount() {
     let discounts = [];
 
     if (randomNum < 0.60) { // 60% chance
-        discounts.push("10% off");
+        discounts.push("-SGD7 Voucher, Min Spend SGD70-");
     } else if (randomNum < 0.95) { // 35% chance
-        discounts.push("20% off");
+        discounts.push("-20% Off Voucher, Min Spend SGD150-");
     } else { // 5% chance
-        discounts.push("50% off");
+        discounts.push("50% Off Voucher, Min Spend SGD400");
     }
     const randomIndex = Math.floor(Math.random() * discounts.length);
     return discounts[randomIndex];
