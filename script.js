@@ -19,7 +19,14 @@ function startGame() {
 }
 
 function revealDiscount(cardId) {
+    if (!confirm("Are you sure you want to open " + cardId + "?")) {
+        return;
+    }
+
     const card = document.getElementById(cardId).querySelector('.card');
+    // ... rest of the function ...
+
+
     card.style.transform = "rotateY(180deg)";
     
     // Insert the random discount and code into the card
@@ -48,11 +55,11 @@ function getRandomDiscount() {
     let discounts = [];
 
     if (randomNum < 0.60) { // 60% chance
-        discounts.push("-SGD7 Voucher, Min Spend SGD70-");
+        discounts.push("20% Off (Min Spend $200)");
     } else if (randomNum < 0.95) { // 35% chance
-        discounts.push("-20% Off Voucher, Min Spend SGD150-");
+        discounts.push("30% Off (Min Spend $300)");
     } else { // 5% chance
-        discounts.push("50% Off Voucher, Min Spend SGD400");
+        discounts.push("50% Off (Min Spend $400)");
     }
     const randomIndex = Math.floor(Math.random() * discounts.length);
     return discounts[randomIndex];
