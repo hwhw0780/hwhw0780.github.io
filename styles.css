@@ -91,6 +91,12 @@ body {
     font-size: larger; /* Adjust this value as needed */
 }
 
+#buttons-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 #optical-frames-button,
 #contact-lens-button {
     margin-right: 10px;
